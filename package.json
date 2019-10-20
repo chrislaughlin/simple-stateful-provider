@@ -29,9 +29,9 @@
     "react-dom": "^16.10.2"
   },
   "author": "Chris Laughlin <bluntm@gmail.com>",
-  "homepage": "",
+  "homepage": "https://github.com/chrislaughlin/simple-statefull-provider",
   "license": "MIT",
-  "repository": "",
+  "repository": "https://github.com/chrislaughlin/simple-statefull-provider.git",
   "keywords": [
     "react-component"
   ]
