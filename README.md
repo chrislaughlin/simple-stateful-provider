@@ -1,10 +1,10 @@
-# simple-statefull-provider
+# simple-stateful-provider
 
 [![Travis][build-badge]][build]
 [![npm package][npm-badge]][npm]
 [![Coveralls][coveralls-badge]][coveralls]
 
-Describe simple-statefull-provider here.
+A simple react hook based provider that can be used for storing simple state for you application.
 
 [build-badge]: https://img.shields.io/travis/user/repo/master.png?style=flat-square
 [build]: https://travis-ci.org/user/repo
