@@ -1,14 +1,21 @@
 import React, {Component} from 'react'
 import {render} from 'react-dom'
 
-import {
-  SimpleProvider,
-  useSimpleSetState,
-  useSimpleState
-} from '../../src'
+import createProvider from '../../src/index';
+
+const [
+    DemoProvider,
+    useDemoState,
+    useDemoSetState
+] = createProvider('test');
+const [
+    DemoSecondProvider,
+    useDemoSecondState,
+    useDemoSecondSetState
+] = createProvider('second');
 
 const ExampleView = () => {
-  const state = useSimpleState();
+  const state = useDemoState();
 
   return (
       <p>
@@ -18,8 +25,8 @@ const ExampleView = () => {
 }
 
 const ExampleSet = () => {
-  const state = useSimpleState();
-  const setState = useSimpleSetState();
+  const state = useDemoState();
+  const setState = useDemoSetState();
 
   return (
       <p>
@@ -33,15 +40,43 @@ const ExampleSet = () => {
   )
 }
 
+const ExampleSecondView = () => {
+    const state = useDemoSecondState();
+
+    return (
+        <p>
+            SECOND STATE: {JSON.stringify(state)}
+        </p>
+    )
+}
+
+const ExampleSecondSet = () => {
+    const state = useDemoSecondState();
+    const setState = useDemoSecondSetState();
+
+    return (
+        <p>
+            <input
+                value={state || ''}
+                onChange={evt => {
+                    setState(evt.target.value)
+                }}
+            />
+        </p>
+    )
+}
+
 class Demo extends Component {
   render() {
     return (
-        <SimpleProvider
-            initState={'test'}
-        >
-          <ExampleView/>
-          <ExampleSet/>
-        </SimpleProvider>
+        <DemoProvider>
+            <DemoSecondProvider >
+              <ExampleView/>
+              <ExampleSet/>
+              <ExampleSecondView/>
+              <ExampleSecondSet/>
+            </DemoSecondProvider>
+        </DemoProvider>
     )
   }
 }

@@ -2,44 +2,51 @@ import React, {
     createContext,
     useState,
     useContext
-} from 'react'
+} from 'react';
 
-const SimpleStateContext = createContext();
-const SimpleSetStateContext = createContext();
+const createProvider = initState => {
+    const SimpleStateContext = createContext();
+    const SimpleSetStateContext = createContext();
 
-const SimpleProvider = ({
-    children,
-    initState
-}) => {
-  const [state, setState] = useState(initState);
+    const SimpleProvider = ({
+                                children
+                            }) => {
+        const [state, setState] = useState(initState);
 
-  return (
-      <SimpleStateContext.Provider value={state}>
-        <SimpleSetStateContext.Provider value={setState}>
-          {children}
-        </SimpleSetStateContext.Provider>
-      </SimpleStateContext.Provider>
-  );
-}
+        return (
+            <SimpleStateContext.Provider value={state}>
+                <SimpleSetStateContext.Provider value={setState}>
+                    {children}
+                </SimpleSetStateContext.Provider>
+            </SimpleStateContext.Provider>
+        );
+    };
 
-const useSimpleState = () => {
-  const context = useContext(SimpleStateContext);
+    const useSimpleState = () => {
+        const context = useContext(SimpleStateContext);
 
-  if (context === undefined) {
-    throw new Error('useSimpleState must be used within a SimpleProvider');
-  }
+        if (context === undefined) {
+            throw new Error('useSimpleState must be used within a SimpleProvider');
+        }
 
-  return context;
-}
+        return context;
+    };
 
-const useSimpleSetState = () => {
-  const context = useContext(SimpleSetStateContext);
+    const useSimpleSetState = () => {
+        const context = useContext(SimpleSetStateContext);
 
-  if (context === undefined) {
-    throw new Error('useSimpleDispatch must be used within a SimpleProvider');
-  }
+        if (context === undefined) {
+            throw new Error('useSimpleDispatch must be used within a SimpleProvider');
+        }
 
-  return context;
-}
+        return context;
+    };
 
-export {SimpleProvider, useSimpleSetState, useSimpleState}
+    return [
+        SimpleProvider,
+        useSimpleState,
+        useSimpleSetState
+    ];
+};
+
+export default createProvider;
