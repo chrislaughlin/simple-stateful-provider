@@ -12,13 +12,13 @@ package allows you to quickly create new providers with state and set state func
 First install the package in your project:
 
 ```bash
-npm install simple-statefull-provider
+npm install simple-stateful-provider
 ``` 
 
 Import the create `createProvider` function where you want to use the provider:
 
 ```
-import createProvider from 'simple-statefull-provider';
+import createProvider from 'simple-stateful-provider';
 ```
 
 Create a new provider using [array destructuring](https://dev.to/sarah_chima/destructuring-assignment---arrays-16f), 
