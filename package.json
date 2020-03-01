@@ -1,5 +1,5 @@
 {
-  "name": "simple-statefull-provider",
+  "name": "simple-stateful-provider",
   "version": "1.2.0",
   "description": "simple-stateful-provider React component",
   "main": "lib/index.js",
@@ -29,9 +29,9 @@
     "react-dom": "^16.10.2"
   },
   "author": "Chris Laughlin <bluntm@gmail.com>",
-  "homepage": "https://github.com/chrislaughlin/simple-statefull-provider",
+  "homepage": "https://github.com/chrislaughlin/simple-stateful-provider",
   "license": "MIT",
-  "repository": "https://github.com/chrislaughlin/simple-statefull-provider.git",
+  "repository": "https://github.com/chrislaughlin/simple-stateful-provider.git",
   "keywords": [
     "react-component"
   ]
