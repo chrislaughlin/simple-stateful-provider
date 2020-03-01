@@ -4,7 +4,7 @@ import React, {
     useContext
 } from 'react';
 
-const createProvider = initState => {
+const createProvider = (initState = null) => {
     const SimpleStateContext = createContext();
     const SimpleSetStateContext = createContext();
 
