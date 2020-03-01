@@ -84,5 +84,5 @@ const ExampleSet = () => {
 ```
  
 [npm-badge]: https://img.shields.io/npm/v/npm-package.png?style=flat-square
-[npm]: https://www.npmjs.org/package/simple-statefull-provider
+[npm]: https://www.npmjs.org/package/simple-stateful-provider
 
