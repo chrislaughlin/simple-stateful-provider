@@ -28,10 +28,9 @@ choosing the names for the provider, state hook and set state hook.
 const [
     DemoProvider,
     useDemoState,
-    useDemoSetState
 ] = createProvider();    
 ```   
-`createProvider` also takes an optional initial state value. 
+`createProvider` also takes an optional initial state value and name. 
 
 Then use the Provider as you would any React provider 
 
@@ -51,7 +50,7 @@ To read the state from the provider you can use the `useDemoState` hook.
 
 ```
 const ExampleView = () => {
-  const state = useDemoState();
+  const { state } = useDemoState();
 
   return (
       <p>
@@ -67,8 +66,7 @@ To set the state from the provider you can use the `useDemoSetState` hook.
 
 ```
 const ExampleSet = () => {
-  const state = useDemoState();
-  const setState = useDemoSetState();
+  const { state, setState } = useDemoState();
 
   return (
       <p>
@@ -83,6 +81,8 @@ const ExampleSet = () => {
 }
 ```
  
+To see fully working demos check the [demo code](https://github.com/chrislaughlin/simple-stateful-provider/tree/master/demo/src). 
+
 [npm-badge]: https://img.shields.io/npm/v/npm-package.png?style=flat-square
 [npm]: https://www.npmjs.org/package/simple-stateful-provider
 

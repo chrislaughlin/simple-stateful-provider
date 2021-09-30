@@ -4,20 +4,27 @@ import React, {
     useContext
 } from 'react';
 
-const createProvider = (initState = null) => {
+const createProvider = (initState = null, name = 'useSimpleState') => {
     const SimpleStateContext = createContext();
-    const SimpleSetStateContext = createContext();
 
     const SimpleProvider = ({
-                                children
-                            }) => {
+        children
+    }) => {
         const [state, setState] = useState(initState);
-
+        const simpleSetState = updates => {
+            if (typeof initState === 'object') {
+                setState(curr => {
+                    return { ...curr, ...updates };
+                });
+            } else {
+                setState(updates)
+            }
+        }
         return (
-            <SimpleStateContext.Provider value={state}>
-                <SimpleSetStateContext.Provider value={setState}>
-                    {children}
-                </SimpleSetStateContext.Provider>
+            <SimpleStateContext.Provider
+                value={{ state, setState: simpleSetState }}
+            >
+                {children}
             </SimpleStateContext.Provider>
         );
     };
@@ -26,17 +33,7 @@ const createProvider = (initState = null) => {
         const context = useContext(SimpleStateContext);
 
         if (context === undefined) {
-            throw new Error('useSimpleState must be used within a SimpleProvider');
-        }
-
-        return context;
-    };
-
-    const useSimpleSetState = () => {
-        const context = useContext(SimpleSetStateContext);
-
-        if (context === undefined) {
-            throw new Error('useSimpleDispatch must be used within a SimpleProvider');
+            throw new Error(`use${name} must be used within a ${name}Provider`);
         }
 
         return context;
@@ -45,7 +42,6 @@ const createProvider = (initState = null) => {
     return [
         SimpleProvider,
         useSimpleState,
-        useSimpleSetState
     ];
 };
 

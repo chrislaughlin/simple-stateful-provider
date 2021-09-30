@@ -1,84 +1,27 @@
-import React, {Component} from 'react'
-import {render} from 'react-dom'
+import React from 'react'
+import { render } from 'react-dom'
+import Counter from './counter';
+import Person from './person';
 
-import createProvider from '../../src/index';
+import { CounterProvider, PersonProvider } from './providers';
 
-const [
-    DemoProvider,
-    useDemoState,
-    useDemoSetState
-] = createProvider('test');
-const [
-    DemoSecondProvider,
-    useDemoSecondState,
-    useDemoSecondSetState
-] = createProvider('second');
+const Demo = () => {
 
-const ExampleView = () => {
-  const state = useDemoState();
+  React.useEffect(() => {
+    document.body.style.backgroundColor = 'black';
+    document.body.style.color = 'white';
+  }, [])
 
   return (
-      <p>
-        STATE: {JSON.stringify(state)}
-      </p>
+    <CounterProvider>
+      <PersonProvider>
+        <Counter/>
+        <Counter/>
+        <Person/>
+        <Person/>
+      </PersonProvider>
+    </CounterProvider>
   )
 }
 
-const ExampleSet = () => {
-  const state = useDemoState();
-  const setState = useDemoSetState();
-
-  return (
-      <p>
-        <input
-            value={state || ''}
-            onChange={evt => {
-              setState(evt.target.value)
-            }}
-        />
-      </p>
-  )
-}
-
-const ExampleSecondView = () => {
-    const state = useDemoSecondState();
-
-    return (
-        <p>
-            SECOND STATE: {JSON.stringify(state)}
-        </p>
-    )
-}
-
-const ExampleSecondSet = () => {
-    const state = useDemoSecondState();
-    const setState = useDemoSecondSetState();
-
-    return (
-        <p>
-            <input
-                value={state || ''}
-                onChange={evt => {
-                    setState(evt.target.value)
-                }}
-            />
-        </p>
-    )
-}
-
-class Demo extends Component {
-  render() {
-    return (
-        <DemoProvider>
-            <DemoSecondProvider >
-              <ExampleView/>
-              <ExampleSet/>
-              <ExampleSecondView/>
-              <ExampleSecondSet/>
-            </DemoSecondProvider>
-        </DemoProvider>
-    )
-  }
-}
-
-render(<Demo/>, document.querySelector('#demo'))
+render(<Demo />, document.querySelector('#demo'))
