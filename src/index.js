@@ -4,7 +4,7 @@ import React, {
     useContext
 } from 'react';
 
-const createProvider = (initState = null) => {
+const createProvider = (initState = null, name = 'useSimpleState') => {
     const SimpleStateContext = createContext();
 
     const SimpleProvider = ({
@@ -33,7 +33,7 @@ const createProvider = (initState = null) => {
         const context = useContext(SimpleStateContext);
 
         if (context === undefined) {
-            throw new Error('useSimpleState must be used within a SimpleProvider');
+            throw new Error(`use${name} must be used within a ${name}Provider`);
         }
 
         return context;
