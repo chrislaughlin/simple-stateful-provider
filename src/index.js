@@ -11,9 +11,19 @@ const createProvider = (initState = null) => {
         children
     }) => {
         const [state, setState] = useState(initState);
-
+        const simpleSetState = updates => {
+            if (typeof initState === 'object') {
+                setState(curr => {
+                    return { ...curr, ...updates };
+                });
+            } else {
+                setState(updates)
+            }
+        }
         return (
-            <SimpleStateContext.Provider value={{ state, setState }}>
+            <SimpleStateContext.Provider
+                value={{ state, setState: simpleSetState }}
+            >
                 {children}
             </SimpleStateContext.Provider>
         );

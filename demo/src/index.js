@@ -1,8 +1,9 @@
 import React from 'react'
 import { render } from 'react-dom'
 import Counter from './counter';
+import Person from './person';
 
-import { CounterProvider } from './providers';
+import { CounterProvider, PersonProvider } from './providers';
 
 const Demo = () => {
 
@@ -13,8 +14,12 @@ const Demo = () => {
 
   return (
     <CounterProvider>
-      <Counter/>
-      <Counter/>
+      <PersonProvider>
+        <Counter/>
+        <Counter/>
+        <Person/>
+        <Person/>
+      </PersonProvider>
     </CounterProvider>
   )
 }
